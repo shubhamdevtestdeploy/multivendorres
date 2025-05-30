@@ -58,22 +58,23 @@
                     <div class="col-lg-12">
                         <div class="company-logo">
                             <ul>
-                                <li class="has-border">
-                                    <figure>
-                                        <a href="#"><img src="{% static 'extra-images/listing-logo18.png' %}" alt=""></a>
-                                    </figure>
-                                </li>
-                                <li class="has-border">
-                                    <figure>
-                                        <a href="#"><img src="{% static 'extra-images/fb-restaurant-02.jpg' %}" alt=""></a>
-                                    </figure>
-                                </li>
-                                <li class="has-border">
-                                    <figure>
-                                        <a href="#"><img src="{% static 'extra-images/fb-restaurant-04.jpg' %}" alt=""></a>
-                                    </figure>
-                                </li>
+                                {% for vendor in vendors %}
+                                    <li class="has-border">
+                                        <figure>
+                                            {% if vendor.user_profile.profile_picture %}
+                                                <a href="#">
+                                                    <img src="{{ vendor.user_profile.profile_picture.url }}" class="attachment-full size-full wp-post-image" alt="">
+                                                </a>
+                                            {% else %}
+                                                <a href="#">
+                                                    <img src="{% static 'images/default-profile.png' %}" class="attachment-full size-full wp-post-image" alt="">
+                                                </a>
+                                            {% endif %}
+                                        </figure>
+                                    </li>
+                                {% endfor %}
                             </ul>
+
                         </div>
                     </div>
                 </div>

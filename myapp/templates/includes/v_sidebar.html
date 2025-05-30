@@ -15,8 +15,8 @@
             </li>
 
 
-            <li class="{% if request.path == '/restaurant-menu-builder.html' %}active{% endif %}">
-                <a href="/restaurant-menu-builder.html"><i class="icon-menu5"></i>Menu Builder</a>
+            <li class="{% if 'menu-builder' in request.path %}active{% endif %}">
+                <a href="{% url 'menu_builder' %}"><i class="icon-menu5"></i>Menu Builder</a>
             </li>
 
             <li class="{% if request.path == '/restaurant-orders.html' %}active{% endif %}">

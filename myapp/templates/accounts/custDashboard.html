@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+ {% extends 'base.html' %}
 {%  load static %}
 {% block content %}
     <!-- Main Section Start -->
@@ -19,10 +19,10 @@
                                 </div>
 
                                 <div class="text-holder">
-                                    <span class="restaurant-title">Shubham kumar</span>
+                                    <span class="restaurant-title">{{ user.first_name }} {{ user.last_name }}</span>
                                     <div class="text">
                                         <i class="icon-location"></i>
-                                        <p>+91 8921990758</p>
+                                        <p>{{ user.phone_number }}</p>
                                     </div>
                                 </div>
                             </div>

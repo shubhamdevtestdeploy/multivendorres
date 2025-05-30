@@ -4,7 +4,7 @@ from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.utils.http import urlsafe_base64_decode
-
+from django.template.defaultfilters import slugify
 from vendor.forms import VendorForm
 from vendor.models import Vendor
 from .forms import UserForm
@@ -23,10 +23,11 @@ def check_role_customer(user):
         return True
     else:
         raise PermissionDenied
+
 def registerUser(request):
     if request.user.is_authenticated:
         messages.warning(request,'You are already logged in')
-        return redirect('dashboard')
+        return redirect('myAccount')
     elif request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid():
@@ -45,6 +46,7 @@ def registerUser(request):
 
     else:
         form = UserForm()
+        print(form)
 
     context = {'form': form}
     return render(request, 'accounts/registerUser.html', context)
@@ -73,6 +75,7 @@ def registerVendor(request):
                 password=password
             )
             user.role = User.VENDOR
+            user.is_active=True
             user.save()  # Ensure role is saved
 
             # Ensure UserProfile exists
@@ -81,7 +84,10 @@ def registerVendor(request):
             # Save Vendor information
             vendor = v_form.save(commit=False)
             vendor.user = user
+            vendor_name=v_form.cleaned_data['vendor_name']
+            vendor.vendor_slug=slugify(vendor_name)+'-'+str(user.id)
             vendor.user_profile = user_profile
+            vendor.is_approved=True
             vendor.save()
             mail_subject="Plese activate your account"
             email_template="accounts/emails/account_verification_email.html"
@@ -145,11 +151,11 @@ def logout(request):
 def myAccount(request):
     user=request.user
     redirecturl=detectUser(user)
+    print(redirecturl)
     return redirect(redirecturl)
 @login_required(login_url='login')
 @user_passes_test(check_role_customer)
 def custdashboard(request):
-
     return render(request,'accounts/custDashboard.html')
 @login_required(login_url='login')
 @user_passes_test(check_role_vendor)
@@ -158,7 +164,6 @@ def vendordashboard(request):
     context={
         'vendor': vendor,
     }
-    print("mai chala bhai")
     return render(request,'accounts/vendorDashboard.html',context)
 
 def dashboard(request):

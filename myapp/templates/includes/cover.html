@@ -1,5 +1,7 @@
 {%  load static %}
-<div class="page-section restaurant-detail-image-section" style="background: url({{ vendor.user_profile.cover_photo.url }}) no-repeat scroll 0 0 / cover;">
+<div class="page-section restaurant-detail-image-section"
+     style="background: url({% if vendor.user_profile.cover_photo and vendor.user_profile.cover_photo.url %}{{ vendor.user_profile.cover_photo.url }}{% else %}{% static 'images/default-cover.png' %}{% endif %}) no-repeat scroll 0 0 / cover;">
+</div>
     <!-- Container Start -->
     <div class="container">
         <!-- Row Start -->
@@ -10,16 +12,21 @@
                     <div class="company-info">
                         <div class="img-holder">
                             <figure>
-                                <img src="{{ vendor.user_profile.profile_picture.url }}" alt="">
+                                <img src="{% if vendor.user_profile.profile_picture %}{{ vendor.user_profile.profile_picture.url }}{% else %}{% static 'images/default-profile.png' %}{% endif %}" alt="Profile Picture">
                             </figure>
                         </div>
 
                         <div class="text-holder">
                             <span class="restaurant-title">{{ vendor.vendor_name }} Demo</span>
                             <div class="text">
-                                <i class="icon-location"></i>
-                                <p>{{ vendor.user_profile.full_address }}</p>
+                                <p>Debug: {{ vendor.user_profile.full_address }}</p>
+
+                                {% if vendor.user_profile.full_address %}
+                                    <i class="icon-location"></i>
+                                    <p>{{ vendor.user_profile.full_address|default_if_none:"No address provided" }}</p>
+                                {% endif %}
                             </div>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -28,3 +35,5 @@
         </div>
         <!-- Row End -->
     </div>
+
+</div>
