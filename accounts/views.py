@@ -30,7 +30,6 @@ def registerUser(request):
     if request.user.is_authenticated:
         messages.warning(request, 'You are already logged in')
         return redirect('myAccount')
-
     elif request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid():
@@ -39,28 +38,26 @@ def registerUser(request):
             user.set_password(password)
             user.role = User.CUSTOMER
             user.save()
-            # Wrap in try-except to capture email issues
+
+            # ✅ Wrap email sending in try-except
             try:
                 mail_subject = "Please activate your account"
                 email_template = "accounts/emails/account_verification_email.html"
                 send_verification_email(request, user, mail_subject, email_template)
-                print("email to gaya")
             except Exception as e:
-                logger.error("Failed to send verification email: %s", e)
-                messages.error(request, "User created but email failed to send. Contact support.")
-                print("isme aa gya exception me")
-                return redirect('registerUser')
+                print(f"Email sending failed: {e}")
+                messages.error(request, "Account created, but failed to send verification email.")
+
             messages.success(request, 'Your account has been created successfully!')
-            print("message success hone ka aya")
             return redirect('registerUser')
         else:
-            logger.error("Invalid registration form: %s", form.errors)
+            print('Invalid form:', form.errors)
     else:
         form = UserForm()
-        v_form = VendorForm()
-        print("kuch hua ki nhi")
-        context = {'form': form, 'v_form': v_form}
-        return render(request, 'accounts/registerUser.html', context)
+        context = {'form': form}
+    return render(request, 'accounts/registerUser.html', context)
+
+
 
 def registerVendor(request):
     if request.user.is_authenticated:
@@ -109,10 +106,13 @@ def registerVendor(request):
         else:
             print('User Form Errors:', form.errors)
             print('Vendor Form Errors:', v_form.errors)
+
     else:
         form = UserForm()
-        context = {'form': form}
-        return render(request, 'accounts/registerUser.html', context)
+        v_form = VendorForm()
+
+    context = {'form': form, 'v_form': v_form}
+    return render(request, 'accounts/registerVendor.html', context)
 
 def activate(request,uidb64,token):
     try:
