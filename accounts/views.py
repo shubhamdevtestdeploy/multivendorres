@@ -11,6 +11,8 @@ from .forms import UserForm
 from .models import User, UserProfile
 from django.contrib import messages,auth
 from .utils import detectUser ,send_verification_email
+import logging
+logger = logging.getLogger(__name__)
 
 def check_role_vendor(user):
     if user.role==1:
@@ -26,8 +28,9 @@ def check_role_customer(user):
 
 def registerUser(request):
     if request.user.is_authenticated:
-        messages.warning(request,'You are already logged in')
+        messages.warning(request, 'You are already logged in')
         return redirect('myAccount')
+
     elif request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid():
@@ -35,21 +38,22 @@ def registerUser(request):
             user = form.save(commit=False)
             user.set_password(password)
             user.role = User.CUSTOMER
-            user.save()  # Fixing this line
-            mail_subject="Plese activate your account"
-            email_template="accounts/emails/account_verification_email.html"
-            send_verification_email(request,user,mail_subject,email_template)
+            user.save()
+
+            # Wrap in try-except to capture email issues
+            try:
+                mail_subject = "Please activate your account"
+                email_template = "accounts/emails/account_verification_email.html"
+                send_verification_email(request, user, mail_subject, email_template)
+            except Exception as e:
+                logger.error("Failed to send verification email: %s", e)
+                messages.error(request, "User created but email failed to send. Contact support.")
+                return redirect('registerUser')
+
             messages.success(request, 'Your account has been created successfully!')
             return redirect('registerUser')
         else:
-            print('Invalid form:', form.errors)
-
-    else:
-        form = UserForm()
-        print(form)
-
-    context = {'form': form}
-    return render(request, 'accounts/registerUser.html', context)
+            logger.error("Invalid registration form: %s", form.errors)
 
 def registerVendor(request):
     if request.user.is_authenticated:
