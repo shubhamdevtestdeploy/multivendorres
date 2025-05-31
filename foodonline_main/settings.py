@@ -1,24 +1,20 @@
 from pathlib import Path
 import os
+from decouple import config, Csv
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-jf@*#4m@x_te$g207jtork@=z9%yzfycn4nrg0wn68t2d439p%'
+SECRET_KEY = config('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['172.104.206.57','127.0.0.1','shubhamplanviewind.shop','www.shubhamplanviewind.shop ']
-
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -33,7 +29,6 @@ INSTALLED_APPS = [
     'customers',
     'orders',
 ]
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -69,25 +64,20 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'foodonline_main.wsgi.application'
 
-
 # Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME':'foodOnline_db',
-        'USER':'postgres',
-        'PASSWORD':'Kolubhai@124',
-        'HOST': 'localhost',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
     }
 }
-AUTH_USER_MODEL='accounts.User'
 
+AUTH_USER_MODEL = 'accounts.User'
 
 # Password validation
-# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -103,37 +93,27 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
-# https://docs.djangoproject.com/en/5.1/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
-
+# Static files
 STATIC_URL = '/static/'
-
-# For development, the static files are located in BASE_DIR/static
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',  # This points to the 'static' directory in your project root
-]
+    BASE_DIR / 'static',
+    ]
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# For production use (optional in development), we can define a STATIC_ROOT
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # This is the location where collectstatic will store files
-
-# Media files (uploads)
+# Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-
+# Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-from django.contrib.messages import constants as messages
+# Messages
 MESSAGE_TAGS = {
     messages.DEBUG: 'debug',
     messages.INFO: 'info',
@@ -142,19 +122,19 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
 
+# Sessions
+SESSION_COOKIE_AGE = 1209600  # 2 weeks
+SESSION_SAVE_EVERY_REQUEST = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 
-# Session settings
-SESSION_COOKIE_AGE = 1209600  # 2 weeks in seconds
-SESSION_SAVE_EVERY_REQUEST = True  # Save the session on every request
-SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # Persist session after browser close
+# Email configuration
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
+EMAIL_USE_SSL = config('EMAIL_USE_SSL', cast=bool)
+EMAIL_PORT = config('EMAIL_PORT', cast=int)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 
-
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = True  # Use SSL
-EMAIL_PORT = 465  # Correct port for SSL
-EMAIL_HOST_USER = 'shubhamunisys10@gmail.com'
-EMAIL_HOST_PASSWORD = 'bosj mcqh tszt pmfr'  # Use App Password
-DEFAULT_FROM_EMAIL='foodOnline MarketPlace <shubhamunisys10@gmail.com>'
-
-CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000', 'http://localhost:3000']
+# CSRF Trusted Origins
+CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS', cast=Csv())
