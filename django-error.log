@@ -1,0 +1,60 @@
+Internal Server Error: /registerUser/
+Traceback (most recent call last):
+  File "/Users/shubham.kumar/Downloads/spring-boot-3-spring-6-hibernate-for-beginners-main 2/10-spring-boot-aop/online ordering/myenv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shubham.kumar/Downloads/spring-boot-3-spring-6-hibernate-for-beginners-main 2/10-spring-boot-aop/online ordering/myenv/lib/python3.11/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "/Users/shubham.kumar/Downloads/spring-boot-3-spring-6-hibernate-for-beginners-main 2/10-spring-boot-aop/online ordering/myenv/lib/python3.11/site-packages/django/core/handlers/base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view accounts.views.registerUser didn't return an HttpResponse object. It returned None instead.
+"GET /registerUser/ HTTP/1.1" 500 67070
+"GET /registerUser/ HTTP/1.1" 500 67070
+Internal Server Error: /registerUser/
+Traceback (most recent call last):
+  File "/Users/shubham.kumar/Downloads/spring-boot-3-spring-6-hibernate-for-beginners-main 2/10-spring-boot-aop/online ordering/myenv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shubham.kumar/Downloads/spring-boot-3-spring-6-hibernate-for-beginners-main 2/10-spring-boot-aop/online ordering/myenv/lib/python3.11/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "/Users/shubham.kumar/Downloads/spring-boot-3-spring-6-hibernate-for-beginners-main 2/10-spring-boot-aop/online ordering/myenv/lib/python3.11/site-packages/django/core/handlers/base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view accounts.views.registerUser didn't return an HttpResponse object. It returned None instead.
+"GET /registerUser/ HTTP/1.1" 500 66920
+"GET /registerUser/ HTTP/1.1" 500 66920
+Internal Server Error: /registerUser/
+Traceback (most recent call last):
+  File "/Users/shubham.kumar/Downloads/spring-boot-3-spring-6-hibernate-for-beginners-main 2/10-spring-boot-aop/online ordering/myenv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shubham.kumar/Downloads/spring-boot-3-spring-6-hibernate-for-beginners-main 2/10-spring-boot-aop/online ordering/myenv/lib/python3.11/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "/Users/shubham.kumar/Downloads/spring-boot-3-spring-6-hibernate-for-beginners-main 2/10-spring-boot-aop/online ordering/myenv/lib/python3.11/site-packages/django/core/handlers/base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view accounts.views.registerUser didn't return an HttpResponse object. It returned None instead.
+"GET /registerUser/ HTTP/1.1" 500 66769
+"GET /registerUser/ HTTP/1.1" 500 66769
+Internal Server Error: /registerUser/
+Traceback (most recent call last):
+  File "/Users/shubham.kumar/Downloads/spring-boot-3-spring-6-hibernate-for-beginners-main 2/10-spring-boot-aop/online ordering/myenv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shubham.kumar/Downloads/spring-boot-3-spring-6-hibernate-for-beginners-main 2/10-spring-boot-aop/online ordering/myenv/lib/python3.11/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "/Users/shubham.kumar/Downloads/spring-boot-3-spring-6-hibernate-for-beginners-main 2/10-spring-boot-aop/online ordering/myenv/lib/python3.11/site-packages/django/core/handlers/base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view accounts.views.registerUser didn't return an HttpResponse object. It returned None instead.
+"GET /registerUser/ HTTP/1.1" 500 66920
+"GET /registerUser/ HTTP/1.1" 500 66920
+Internal Server Error: /registerUser/
+Traceback (most recent call last):
+  File "/Users/shubham.kumar/Downloads/spring-boot-3-spring-6-hibernate-for-beginners-main 2/10-spring-boot-aop/online ordering/myenv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shubham.kumar/Downloads/spring-boot-3-spring-6-hibernate-for-beginners-main 2/10-spring-boot-aop/online ordering/myenv/lib/python3.11/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "/Users/shubham.kumar/Downloads/spring-boot-3-spring-6-hibernate-for-beginners-main 2/10-spring-boot-aop/online ordering/myenv/lib/python3.11/site-packages/django/core/handlers/base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view accounts.views.registerUser didn't return an HttpResponse object. It returned None instead.
+"GET /registerUser/ HTTP/1.1" 500 66906
+"GET /registerUser/ HTTP/1.1" 500 66906
